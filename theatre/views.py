@@ -164,6 +164,7 @@ class PerformanceViewSet(viewsets.ModelViewSet):
         Performance.objects.select_related("play", "theatre_hall")
         .prefetch_related("play__genres", "play__actors", "tickets")
         .annotate(tickets_count=Count("tickets"))
+        .order_by("show_time")
     )
     serializer_class = PerformanceSerializer
     permission_classes = (IsAdminOrReadOnly,)
