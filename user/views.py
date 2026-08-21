@@ -1,6 +1,6 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from user.serializers import UserSerializer
 
@@ -14,7 +14,7 @@ class CreateUserView(generics.CreateAPIView):
 @extend_schema(tags=["Users"])
 class ManageUserView(generics.RetrieveUpdateAPIView):
     serializer_class = UserSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_object(self):
         return self.request.user
-
