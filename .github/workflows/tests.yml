@@ -1,0 +1,36 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Check migrations
+        run: python manage.py makemigrations --check --dry-run
+
+      - name: Lint
+        run: ruff check .
+
+      - name: Validate OpenAPI schema
+        run: python manage.py spectacular --file schema.yml --validate
+
+      - name: Run tests
+        run: python manage.py test
+
