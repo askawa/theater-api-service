@@ -56,14 +56,6 @@ Useful links:
 - Admin panel: <http://127.0.0.1:8000/admin/>
 - Browsable API login: <http://127.0.0.1:8000/api-auth/login/>
 
-## Screenshots
-
-![Browsable API root](docs/screenshots/api-root.jpg)
-
-![Plays list](docs/screenshots/plays-list.jpg)
-
-![Performance details](docs/screenshots/performance-detail.jpg)
-
 ## Tests
 
 ```bash
